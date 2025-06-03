@@ -10,31 +10,23 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/toaster";
+import { useAuth } from "@/contexts/AuthContext";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
 interface DepositResponse {
-  message: string;
-  deposit: {
-    id: number;
-    user_id: number;
-    amount: number;
-    api_ref: string;
-    status: string;
-    createdAt: string;
-  };
-  payment: {
-    qr_code: string;
-    expiration_date: string;
-    amount: number;
-  };
+  transaction_id: string;
+  pix_qrcode: string;
+  amount: number;
+  status: string;
 }
 
 const presetValues = [50, 100, 250, 500, 1000, 2500];
 
 export default function Deposit() {
+  const { user } = useAuth();
   const [amount, setAmount] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -53,30 +45,28 @@ export default function Deposit() {
       setLoading(true);
 
       const token = localStorage.getItem("token");
-      const userId = localStorage.getItem("userId");
 
-      if (!token || !userId) {
+      if (!token) {
         toast.error("Sessão expirada. Por favor, faça login novamente.");
         router.push("/");
         return;
       }
 
-      const response = await fetch("https://api.xotc.lat/v1/gateway/deposit", {
+      const response = await fetch("https://srv.xotc.lat/api/v1/payments/deposit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          amount: Number(amount),
-          user_id: Number(userId)
+          amount: Number(amount)
         }),
       });
 
-      const data = await response.json();
+      const data: DepositResponse = await response.json();
 
       if (!response.ok) {
-        toast.error(data.message || "Erro ao gerar depósito");
+        toast.error("Erro ao gerar depósito");
         return;
       }
       
@@ -84,10 +74,10 @@ export default function Deposit() {
       router.push({
         pathname: "/deposit/payment",
         query: { 
-          qr_code: data.payment.qr_code,
-          amount: data.payment.amount,
-          expiration_date: data.payment.expiration_date,
-          deposit_id: data.deposit.id
+          qr_code: data.pix_qrcode,
+          amount: data.amount,
+          transaction_id: data.transaction_id,
+          status: data.status
         }
       });
 
@@ -140,7 +130,7 @@ export default function Deposit() {
                       onChange={(e) => setAmount(e.target.value)}
                       className="pl-12 h-14 bg-white/5 border-white/10 text-lg font-medium"
                       placeholder="0.00"
-                      min="50"
+                      min="5"
                     />
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 text-lg font-medium text-muted-foreground">
                       R$
@@ -167,7 +157,7 @@ export default function Deposit() {
 
                 <Button 
                   className="w-full bg-[#d5eb2d] text-background hover:bg-[#d5eb2d]/90 h-14 text-lg font-medium"
-                  disabled={!amount || Number(amount) < 50 || loading}
+                  disabled={!amount || Number(amount) < 5 || loading}
                   onClick={handleDeposit}
                 >
                   <div className="flex items-center justify-center gap-2">

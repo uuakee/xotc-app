@@ -129,14 +129,14 @@ export default function Profile() {
                       <div className="space-y-1">
                         <span className="text-sm text-muted-foreground">Rendimento Max.</span>
                         <div className="flex items-baseline gap-1">
-                          <span className="text-xl font-bold text-[#d5eb2d]">12.2%</span>
+                          <span className="text-xl font-bold text-[#d5eb2d]">7.2%</span>
                           <span className="text-xs text-emerald-400">+0.2%</span>
                         </div>
                       </div>
                       <div className="space-y-1">
                         <span className="text-sm text-muted-foreground">Tempo Médio</span>
                         <div className="flex items-baseline gap-1">
-                          <span className="text-xl font-bold text-foreground">90</span>
+                          <span className="text-xl font-bold text-foreground">120</span>
                           <span className="text-xs text-muted-foreground">dias</span>
                         </div>
                       </div>

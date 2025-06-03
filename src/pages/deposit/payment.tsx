@@ -15,15 +15,15 @@ const spaceGrotesk = Space_Grotesk({
 
 export default function DepositPayment() {
   const router = useRouter();
-  const { qr_code, amount, expiration_date, deposit_id } = router.query;
+  const { qr_code, amount, transaction_id, status } = router.query;
   const [copied, setCopied] = useState(false);
 
   // Protege a rota
   useEffect(() => {
-    if (!qr_code || !amount || !expiration_date || !deposit_id) {
+    if (!qr_code || !amount || !transaction_id || !status) {
       router.push("/deposit");
     }
-  }, [qr_code, amount, expiration_date, deposit_id, router]);
+  }, [qr_code, amount, transaction_id, status, router]);
 
   const handleCopyQRCode = async () => {
     try {
@@ -46,7 +46,7 @@ export default function DepositPayment() {
     });
   };
 
-  if (!qr_code || !amount || !expiration_date || !deposit_id) {
+  if (!qr_code || !amount || !transaction_id || !status) {
     return null;
   }
 
@@ -91,6 +91,21 @@ export default function DepositPayment() {
                   </div>
                 </div>
 
+                {/* Status */}
+                <div className="text-center">
+                  <span className={`text-sm px-2 py-1 rounded-full ${
+                    status === 'PENDING' 
+                      ? 'bg-yellow-500/10 text-yellow-500'
+                      : status === 'COMPLETED'
+                      ? 'bg-green-500/10 text-green-500'
+                      : 'bg-red-500/10 text-red-500'
+                  }`}>
+                    {status === 'PENDING' ? 'Aguardando Pagamento' : 
+                     status === 'COMPLETED' ? 'Pagamento Confirmado' : 
+                     'Pagamento Falhou'}
+                  </span>
+                </div>
+
                 {/* Botão Copiar */}
                 <Button
                   onClick={handleCopyQRCode}
@@ -106,12 +121,9 @@ export default function DepositPayment() {
                   </div>
                 </Button>
 
-                {/* Timer */}
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Clock className="w-4 h-4" />
-                  <span>
-                    Expira em: {formatExpirationDate(expiration_date as string)}
-                  </span>
+                {/* ID da Transação */}
+                <div className="text-xs text-muted-foreground">
+                  ID da Transação: {transaction_id}
                 </div>
               </div>
             </CardContent>
