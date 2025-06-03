@@ -27,18 +27,25 @@ const presetValues = [100, 250, 500, 1000, 2500, 5000];
 
 type PixKeyType = "CPF" | "CNPJ" | "EMAIL" | "PHONE";
 
+interface WithdrawalResponse {
+  success: boolean;
+  transaction_id: string;
+  amount: number;
+  status: string;
+}
+
 export default function Withdraw() {
   const [amount, setAmount] = useState<string>('');
   const [pixKeyType, setPixKeyType] = useState<PixKeyType>("CPF");
   const [pixKey, setPixKey] = useState<string>('');
-  const [beneficiaryCPF, setBeneficiaryCPF] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+
   const handlePresetClick = (value: number) => {
     setAmount(value.toString());
   };
 
   const calculateNetAmount = (gross: number) => {
-    const fee = gross * 0.15;
+    const fee = gross * 0.05;
     return gross - fee;
   };
 
@@ -56,9 +63,8 @@ export default function Withdraw() {
       setLoading(true);
 
       const token = localStorage.getItem("token");
-      const userId = localStorage.getItem("userId");
 
-      if (!token || !userId) {
+      if (!token) {
         toast.error("Sessão expirada. Por favor, faça login novamente.");
         router.push("/");
         return;
@@ -74,44 +80,37 @@ export default function Withdraw() {
         return;
       }
 
-      if (!beneficiaryCPF) {
-        toast.error("Por favor, informe o CPF do beneficiário.");
-        return;
-      }
-
-      const response = await fetch("https://api.xotc.lat/v1/gateway/withdrawal", {
+      const response = await fetch("https://srv.xotc.lat/api/v1/payments/withdrawal", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          user_id: userId,
           amount: Number(amount),
-          cl_keytype: pixKeyType,
-          cl_key: pixKey,
-          cl_document: beneficiaryCPF
+          pix_type: pixKeyType,
+          pix_key: pixKey
         }),
       });
 
-      const data = await response.json();
+      const data: WithdrawalResponse = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Erro ao processar saque");
+        throw new Error("Erro ao processar saque");
       }
 
-      toast.success("Solicitação de saque enviada com sucesso!");
+      if (data.success) {
+        toast.success("Solicitação de saque enviada com sucesso!");
+        // Limpar campos após sucesso
+        setAmount("");
+        setPixKey("");
+      } else {
+        throw new Error("Erro ao processar saque");
+      }
       
-      // Limpar campos após sucesso
-      setAmount("");
-      setPixKey("");
-      setBeneficiaryCPF("");
-      
-      // Opcional: redirecionar para página de histórico de saques
-      // router.push("/last-withdrawals");
     } catch (error) {
       console.error("Erro ao processar saque:", error);
-      toast.error(error instanceof Error ? error.message : "Erro ao processar saque. Tente novamente.");
+      toast.error("Erro ao processar saque. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -162,9 +161,9 @@ export default function Withdraw() {
                 </div>
                 {amount && (
                   <div className="flex items-center justify-between px-1 mt-2">
-                    <span className="text-sm text-muted-foreground">Taxa (15%)</span>
+                    <span className="text-sm text-muted-foreground">Taxa (5%)</span>
                     <span className="text-sm text-muted-foreground">
-                      R$ {(Number(amount) * 0.15).toFixed(2)}
+                      R$ {(Number(amount) * 0.05).toFixed(2)}
                     </span>
                   </div>
                 )}
@@ -223,21 +222,11 @@ export default function Withdraw() {
                     placeholder={getPixKeyPlaceholder()}
                   />
                 </div>
-
-                <div className="space-y-2">
-                    <label className="text-sm text-muted-foreground">CPF do Beneficiário</label>
-                    <Input
-                        value={beneficiaryCPF}
-                        onChange={(e) => setBeneficiaryCPF(e.target.value)}
-                        className="h-14 bg-white/5 border-white/10"
-                        placeholder="000.000.000-00"
-                    />
-                </div>
               </div>
 
               <Button 
                 className="w-full bg-[#d5eb2d] text-background hover:bg-[#d5eb2d]/90 h-14 text-lg font-medium"
-                disabled={!amount || !pixKey || !beneficiaryCPF || Number(amount) < 100 || loading}
+                disabled={!amount || !pixKey || Number(amount) < 100 || loading}
                 onClick={handleWithdraw}
               >
                 <div className="flex items-center justify-center gap-2">

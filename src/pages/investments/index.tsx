@@ -103,7 +103,7 @@ export default function Investments() {
     return null;
   }
 
-  return (
+    return (
     <>
       <Head>
         <title>Investimentos | XOTC</title>
@@ -112,72 +112,72 @@ export default function Investments() {
           content="Gerencie seus investimentos na XOTC. Acompanhe seus planos ativos e rendimentos." 
         />
       </Head>
-      <div className={spaceGrotesk.className}>
-        <div className="relative min-h-screen overflow-hidden bg-background">
-          {/* Grid Background */}
-          <div className="fixed inset-0 bg-grid-pattern opacity-[0.15] scale-[1.2]" />
-          <div className="fixed inset-0 bg-[#d5eb2d]/5 blur-[100px] rotate-12" />
-          <div className="fixed -top-40 -right-40 h-80 w-80 rounded-full bg-[#d5eb2d]/20 blur-[100px]" />
-          <div className="fixed -bottom-40 -left-40 h-80 w-80 rounded-full bg-[#d5eb2d]/20 blur-[100px]" />
+    <div className={spaceGrotesk.className}>
+      <div className="relative min-h-screen overflow-hidden bg-background">
+        {/* Grid Background */}
+        <div className="fixed inset-0 bg-grid-pattern opacity-[0.15] scale-[1.2]" />
+        <div className="fixed inset-0 bg-[#d5eb2d]/5 blur-[100px] rotate-12" />
+        <div className="fixed -top-40 -right-40 h-80 w-80 rounded-full bg-[#d5eb2d]/20 blur-[100px]" />
+        <div className="fixed -bottom-40 -left-40 h-80 w-80 rounded-full bg-[#d5eb2d]/20 blur-[100px]" />
 
-          <div className="relative p-4 md:p-6 max-w-4xl mx-auto pb-24">
-            <header className="mb-6">
-              <h1 className="text-xl font-bold text-foreground">Meus Investimentos</h1>
-              <p className="text-sm text-muted-foreground mt-1">Acompanhe seus investimentos ativos</p>
-            </header>
+        <div className="relative p-4 md:p-6 max-w-4xl mx-auto pb-24">
+          <header className="mb-6">
+            <h1 className="text-xl font-bold text-foreground">Meus Investimentos</h1>
+            <p className="text-sm text-muted-foreground mt-1">Acompanhe seus investimentos ativos</p>
+          </header>
 
-            {/* Cards de Resumo */}
-            <div className="flex flex-col gap-3 mb-8">
-              <Card className="bg-card/30 backdrop-blur-xl border-white/10">
-                <CardContent className="p-4">
-                  <div className="flex items-start gap-4">
-                    <div className="h-10 w-10 rounded-full bg-[#d5eb2d]/10 flex items-center justify-center flex-shrink-0">
-                      <Wallet className="w-5 h-5 text-[#d5eb2d]" />
-                    </div>
-                    <div className="flex-1">
-                      <span className="text-sm text-muted-foreground/60">Total Investido</span>
-                      <div className="flex items-center justify-between mt-1">
-                        <span className="text-2xl font-bold text-foreground">
+          {/* Cards de Resumo */}
+          <div className="flex flex-col gap-3 mb-8">
+            <Card className="bg-card/30 backdrop-blur-xl border-white/10">
+              <CardContent className="p-4">
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 rounded-full bg-[#d5eb2d]/10 flex items-center justify-center flex-shrink-0">
+                    <Wallet className="w-5 h-5 text-[#d5eb2d]" />
+                  </div>
+                  <div className="flex-1">
+                    <span className="text-sm text-muted-foreground/60">Total Investido</span>
+                    <div className="flex items-center justify-between mt-1">
+                      <span className="text-2xl font-bold text-foreground">
                           R$ {totalInvested.toFixed(2)}
-                        </span>
-                        <span className="text-xs px-2 py-1 rounded-full bg-[#d5eb2d]/10 text-[#d5eb2d] font-medium">
+                      </span>
+                      <span className="text-xs px-2 py-1 rounded-full bg-[#d5eb2d]/10 text-[#d5eb2d] font-medium">
                           {activeInvestments.length} planos
-                        </span>
-                      </div>
+                      </span>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </CardContent>
+            </Card>
 
-              <Card className="bg-card/30 backdrop-blur-xl border-white/10">
-                <CardContent className="p-4">
-                  <div className="flex items-start gap-4">
-                    <div className="h-10 w-10 rounded-full bg-[#d5eb2d]/10 flex items-center justify-center flex-shrink-0">
-                      <TrendingUp className="w-5 h-5 text-[#d5eb2d]" />
-                    </div>
-                    <div className="flex-1">
-                      <span className="text-sm text-muted-foreground/60">Retorno Diário</span>
-                      <div className="flex items-center justify-between mt-1">
-                        <span className="text-2xl font-bold text-[#d5eb2d]">
-                          R$ {totalDailyProfit.toFixed(2)}
-                        </span>
-                      </div>
+            <Card className="bg-card/30 backdrop-blur-xl border-white/10">
+              <CardContent className="p-4">
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 rounded-full bg-[#d5eb2d]/10 flex items-center justify-center flex-shrink-0">
+                    <TrendingUp className="w-5 h-5 text-[#d5eb2d]" />
+                  </div>
+                  <div className="flex-1">
+                    <span className="text-sm text-muted-foreground/60">Retorno Diário</span>
+                    <div className="flex items-center justify-between mt-1">
+                      <span className="text-2xl font-bold text-[#d5eb2d]">
+                        R$ {totalDailyProfit.toFixed(2)}
+                      </span>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Investimentos Ativos */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between px-1">
+              <h2 className="text-lg font-semibold text-foreground">Investimentos Ativos</h2>
+              <span className="text-xs text-muted-foreground">
+                  {activeInvestments.length} ativos
+              </span>
             </div>
 
-            {/* Investimentos Ativos */}
             <div className="space-y-3">
-              <div className="flex items-center justify-between px-1">
-                <h2 className="text-lg font-semibold text-foreground">Investimentos Ativos</h2>
-                <span className="text-xs text-muted-foreground">
-                  {activeInvestments.length} ativos
-                </span>
-              </div>
-
-              <div className="space-y-3">
                 {activeInvestments.map(investment => (
                   <InvestmentCard key={investment.id} investment={investment} />
                 ))}

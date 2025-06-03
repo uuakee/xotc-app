@@ -82,7 +82,7 @@ export default function Home() {
 
   return (
     <>
-      <Head>
+    <Head>
         <title>Login | XOTC</title>
         <meta 
           name="description" 
@@ -90,46 +90,46 @@ export default function Home() {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <div className={spaceGrotesk.className}>
-        <div className="relative min-h-screen overflow-hidden">
-          <div className="absolute inset-0 bg-grid-pattern opacity-[0.15] scale-[1.2]" />
-          <div className="absolute inset-0 bg-[#d5eb2d]/5 blur-[100px] rotate-12" />
-          <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-[#d5eb2d]/20 blur-[100px]" />
-          <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-[#d5eb2d]/20 blur-[100px]" />
-          
-          <main className="relative flex min-h-screen flex-col items-center justify-center p-4">
-            <Card className="w-full max-w-md border border-white/10 bg-card/30 backdrop-blur-xl shadow-xl shadow-black/10">
-              <CardHeader className="space-y-6 pb-4s">
-                <div className="flex flex-col items-center gap-6">
-                  <div className="relative h-16 w-48 md:w-56">
-                    <Image
-                      src="/logotype.svg"
-                      alt="logo"
-                      fill
-                      className="object-contain"
-                      priority
-                    />
-                  </div>
-                  <div className="text-center space-y-2">
-                    <h1 className="text-3xl font-bold text-foreground">
-                      Comece a investir agora
-                    </h1>
-                    <p className="text-sm text-muted-foreground/80 max-w-sm">
-                      Acesse sua conta e descubra um mundo de oportunidades para fazer seu dinheiro trabalhar por você
-                    </p>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-2">
+    </Head>
+    <div className={spaceGrotesk.className}>
+      <div className="relative min-h-screen overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.15] scale-[1.2]" />
+        <div className="absolute inset-0 bg-[#d5eb2d]/5 blur-[100px] rotate-12" />
+      <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-[#d5eb2d]/20 blur-[100px]" />
+      <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-[#d5eb2d]/20 blur-[100px]" />
+      
+      <main className="relative flex min-h-screen flex-col items-center justify-center p-4">
+        <Card className="w-full max-w-md border border-white/10 bg-card/30 backdrop-blur-xl shadow-xl shadow-black/10">
+          <CardHeader className="space-y-6 pb-4s">
+            <div className="flex flex-col items-center gap-6">
+              <div className="relative h-16 w-48 md:w-56">
+                <Image
+                  src="/logotype.svg"
+                  alt="logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <div className="text-center space-y-2">
+                <h1 className="text-3xl font-bold text-foreground">
+                  Comece a investir agora
+                </h1>
+                <p className="text-sm text-muted-foreground/80 max-w-sm">
+                  Acesse sua conta e descubra um mundo de oportunidades para fazer seu dinheiro trabalhar por você
+                </p>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="space-y-2">
                   <Label htmlFor="cpf" className="text-sm font-medium inline-flex items-center gap-2">
-                    <svg className="w-4 h-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+                </svg>
                     CPF
-                  </Label>
-                  <Input
+              </Label>
+                <Input
                     id="cpf"
                     type="text"
                     placeholder="000.000.000-00"
@@ -137,57 +137,57 @@ export default function Home() {
                     onChange={handleCpfChange}
                     maxLength={14}
                     className="bg-background/50 border-white/10 focus:border-[#d5eb2d]/50 focus:ring-[#d5eb2d]/20 transition-all h-12"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="password" className="text-sm font-medium inline-flex items-center gap-2">
-                    <svg className="w-4 h-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
-                    Senha
-                  </Label>
-                  <div className="relative group">
-                    <Input
-                      id="password"
-                      type="password"
-                      placeholder="Digite sua senha"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="bg-background/50 border-white/10 focus:border-[#d5eb2d]/50 focus:ring-[#d5eb2d]/20 transition-all pr-10 h-12"
-                    />
-                    <button 
-                      type="button"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/50 hover:text-muted-foreground transition-colors"
-                    >
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="flex flex-col gap-4 pt-2">
-                <Button 
-                  onClick={handleLogin}
-                  disabled={loading}
-                  className="w-full bg-[#d5eb2d] text-background hover:bg-[#d5eb2d]/90 transition-all font-medium h-12 hover:scale-[1.02] active:scale-[0.98]"
+                />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-sm font-medium inline-flex items-center gap-2">
+                <svg className="w-4 h-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                Senha
+              </Label>
+              <div className="relative group">
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Digite sua senha"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="bg-background/50 border-white/10 focus:border-[#d5eb2d]/50 focus:ring-[#d5eb2d]/20 transition-all pr-10 h-12"
+                />
+                <button 
+                  type="button"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/50 hover:text-muted-foreground transition-colors"
                 >
-                  {loading ? "Entrando..." : "Acessar minha conta"}
-                </Button>
-                <div className="flex flex-col items-center gap-2 text-center">
-                  <p className="text-xs text-muted-foreground/60">
-                    Ainda não tem uma conta?{" "}
-                    <a href="/register" className="text-[#d5eb2d] hover:underline">
-                      Comece a investir
-                    </a>
-                  </p>
-                </div>
-              </CardFooter>
-            </Card>
-          </main>
-        </div>
-      </div>
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter className="flex flex-col gap-4 pt-2">
+            <Button 
+              onClick={handleLogin}
+              disabled={loading}
+              className="w-full bg-[#d5eb2d] text-background hover:bg-[#d5eb2d]/90 transition-all font-medium h-12 hover:scale-[1.02] active:scale-[0.98]"
+            >
+              {loading ? "Entrando..." : "Acessar minha conta"}
+            </Button>
+            <div className="flex flex-col items-center gap-2 text-center">
+              <p className="text-xs text-muted-foreground/60">
+                Ainda não tem uma conta?{" "}
+                <a href="/register" className="text-[#d5eb2d] hover:underline">
+                  Comece a investir
+                </a>
+              </p>
+            </div>
+          </CardFooter>
+        </Card>
+      </main>
+    </div>
+    </div>
     </>
   );
 }

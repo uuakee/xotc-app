@@ -79,7 +79,7 @@ export function InvestmentCard({ investment }: InvestmentCardProps) {
                   R$ {dailyProfit.toFixed(2)}
                 </span>
               </div>
-            </div>
+                </div>
             <div>
               <span className="text-xs text-muted-foreground/60">Total Ganho</span>
               <div className="flex items-baseline gap-1">

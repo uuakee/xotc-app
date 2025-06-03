@@ -349,7 +349,7 @@ export default function Dashboard() {
                   
                   <div>
                     <span className="text-4xl font-bold tracking-tight text-foreground">
-                      R$ {user?.wallet.balance || '0,00'}
+                      R$ {((Number(user?.wallet?.balance) || 0) + (Number(user?.wallet?.balance_withdrawal) || 0)).toFixed(2)}
                     </span>
                   </div>
 
