@@ -169,7 +169,6 @@ export default function Register() {
 
   return (
     <div className={spaceGrotesk.className}>
-      <Toaster />
       <div className="relative min-h-screen overflow-hidden">
         {/* Grid Background com container ajustado */}
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.15] scale-[1.2]" />

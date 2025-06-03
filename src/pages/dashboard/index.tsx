@@ -1,7 +1,7 @@
 import { Space_Grotesk } from "next/font/google";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Bell, Clock, Gift, Plus, PartyPopper, Coins, X, AlertCircle } from "lucide-react";
+import { ArrowDown, Bell, Clock, Gift, Plus, PartyPopper, Coins, X, AlertCircle, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { NavigationBar } from "@/components/navigation-bar";
@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/dialog";
 import { PlanCard } from "@/components/plan-card";
 import { useAuth } from "@/contexts/AuthContext";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 const spaceGrotesk = Space_Grotesk({
     subsets: ["latin"],
@@ -68,6 +70,7 @@ export default function Dashboard() {
   const [currencies, setCurrencies] = useState<CurrencyData[]>([]);
   const [showGiftDialog, setShowGiftDialog] = useState(false);
   const [showErrorDialog, setShowErrorDialog] = useState(false);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const [timeLeft, setTimeLeft] = useState<string>("");
   const [plans, setPlans] = useState<Plan[]>([]);
   const router = useRouter();
@@ -75,6 +78,7 @@ export default function Dashboard() {
   useEffect(() => {
     setMounted(true);
     setCurrentTime(new Date());
+    checkWelcomeModal();
     
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -229,6 +233,31 @@ export default function Dashboard() {
     } catch (error) {
       console.error("Erro ao resgatar presente:", error);
       toast.error("Erro ao resgatar presente diário");
+    }
+  };
+
+  const checkWelcomeModal = () => {
+    const lastDismissed = localStorage.getItem('welcomeModalDismissed');
+    
+    if (lastDismissed) {
+      const dismissedDate = new Date(lastDismissed);
+      const now = new Date();
+      const diffHours = (now.getTime() - dismissedDate.getTime()) / (1000 * 60 * 60);
+      
+      if (diffHours >= 48) {
+        setShowWelcomeModal(true);
+        localStorage.removeItem('welcomeModalDismissed');
+      }
+    } else {
+      setShowWelcomeModal(true);
+    }
+  };
+
+  const handleDontShowAgain = (checked: boolean) => {
+    if (checked) {
+      localStorage.setItem('welcomeModalDismissed', new Date().toISOString());
+    } else {
+      localStorage.removeItem('welcomeModalDismissed');
     }
   };
 
@@ -435,9 +464,9 @@ export default function Dashboard() {
                 <Button 
                   variant="ghost" 
                   className="text-sm text-muted-foreground hover:text-[#d5eb2d]"
-                  onClick={() => router.push('/plans')}
+                
                 >
-                  Ver todos
+                  Web3 Pool
                 </Button>
               </div>
 
@@ -593,6 +622,52 @@ export default function Dashboard() {
                 >
                   Entendi
                 </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
+
+          <Dialog open={showWelcomeModal} onOpenChange={setShowWelcomeModal}>
+            <DialogContent className="bg-card/30 backdrop-blur-xl border-white/10 sm:max-w-[425px]">
+              <div className="flex flex-col items-center gap-6 py-4">
+                <div className="relative w-32 h-12">
+                  <Image
+                    src="/logotype.svg"
+                    alt="XOTC"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+
+                <div className="text-center space-y-2">
+                  <h2 className="text-xl font-bold text-foreground">
+                    Bem-vindo à XOTC
+                  </h2>
+                  <p className="text-sm text-muted-foreground">
+                    Tenha investimentos baseados em Web3 com altos rendimentos e segurança. Conheça agora nossa carteira de ativos e comece a lucrar hoje mesmo!
+                  </p>
+                </div>
+
+                <Button
+                  className="w-full bg-[#d5eb2d] hover:bg-[#d5eb2d]/90 text-black/80 gap-2"
+                  onClick={() => window.open('https://t.me/xotcinvest', '_blank')}
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Canal Oficial Telegram
+                </Button>
+
+                <div className="flex items-center gap-2">
+                  <Checkbox
+                    id="dontShow"
+                    onCheckedChange={handleDontShowAgain}
+                  />
+                  <Label
+                    htmlFor="dontShow"
+                    className="text-sm text-muted-foreground"
+                  >
+                    Não mostrar esta mensagem novamente
+                  </Label>
+                </div>
               </div>
             </DialogContent>
           </Dialog>
