@@ -122,7 +122,6 @@ export default function Marketplace() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Toaster richColors duration={4000} />
       <div className={spaceGrotesk.className}>
         <div className="relative min-h-screen overflow-hidden bg-background">
           {/* Grid Background */}

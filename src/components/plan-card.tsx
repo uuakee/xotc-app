@@ -83,8 +83,8 @@ export function PlanCard({ plan, onPurchase }: PlanCardProps) {
         return;
       }
 
-      await axios.post(
-        "https://srv.xotc.lat/api/v1/plans/purchase",
+      const response = await axios.post(
+        "https://srv.xotc.lat/api/v1/users/investments/buy",
         { plan_id: plan.id },
         {
           headers: {
@@ -94,10 +94,17 @@ export function PlanCard({ plan, onPurchase }: PlanCardProps) {
         }
       );
 
-      toast.success("Plano adquirido com sucesso!", {
-        duration: 4000
-      });
-      onPurchase(plan.id);
+      if (response.data.success) {
+        const investment = response.data.investment;
+        const expiryDate = new Date(investment.expires_at).toLocaleDateString('pt-BR');
+        
+        toast.success(`Plano adquirido com sucesso! Expira em ${expiryDate}`, {
+          duration: 4000
+        });
+        onPurchase(plan.id);
+      } else {
+        throw new Error("Falha ao processar a compra");
+      }
     } catch (error: any) {
       if (error.response?.status === 401) {
         toast.error("Sessão expirada. Por favor, faça login novamente.", {
@@ -106,6 +113,10 @@ export function PlanCard({ plan, onPurchase }: PlanCardProps) {
         window.location.href = "/";
       } else if (error.response?.data?.message) {
         toast.error(error.response.data.message, {
+          duration: 4000
+        });
+      } else if (error.response?.data?.error) {
+        toast.error(error.response.data.error, {
           duration: 4000
         });
       } else {

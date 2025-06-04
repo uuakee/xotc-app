@@ -248,7 +248,6 @@ export default function Profile() {
           open={showPasswordDialog} 
           onOpenChange={setShowPasswordDialog} 
         />
-        <Toaster richColors />
       </div>
     </>
   );

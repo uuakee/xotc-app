@@ -134,12 +134,14 @@ export default function Dashboard() {
           }
         );
 
-        // Ordenar planos por nível (decrescente)
-        const sortedPlans = response.data.sort((a, b) => {
-          const levelA = parseInt(a.level.replace('LEVEL_', ''));
-          const levelB = parseInt(b.level.replace('LEVEL_', ''));
-          return levelB - levelA;
-        });
+        // Filtrar apenas planos ativos e ordenar por preço
+        const sortedPlans = response.data
+          .filter(plan => plan.is_active)
+          .sort((a, b) => {
+            const priceA = parseFloat(a.price);
+            const priceB = parseFloat(b.price);
+            return priceA - priceB; // Ordem crescente (mais barato primeiro)
+          });
         
         setPlans(sortedPlans);
       } catch (error) {
@@ -280,7 +282,6 @@ export default function Dashboard() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Toaster richColors duration={4000} />
       <div className={spaceGrotesk.className}>
         <div className="relative min-h-screen overflow-hidden bg-background">
           {/* Grid Background */}

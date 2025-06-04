@@ -192,7 +192,6 @@ export default function Investments() {
           </div>
 
           <NavigationBar currentPath="/investments" />
-          <Toaster richColors />
         </div>
       </div>
     </>

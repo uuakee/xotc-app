@@ -103,7 +103,6 @@ export default function Deposit() {
 
   return (
     <div className={spaceGrotesk.className}>
-      <Toaster />
       <div className="relative min-h-screen overflow-hidden bg-background">
         {/* Grid Background */}
         <div className="fixed inset-0 bg-grid-pattern opacity-[0.15] scale-[1.2]" />
