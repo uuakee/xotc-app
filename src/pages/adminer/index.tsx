@@ -37,7 +37,7 @@ export default function Page() {
           return
         }
 
-        const response = await fetch("https://srv.xotc.lat/api/v1/admin/dashboard", {
+        const response = await fetch("https://sv2.xotc.lat/api/v1/admin/dashboard", {
           headers: {
             Authorization: `Bearer ${token}`
           }

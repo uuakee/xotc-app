@@ -84,7 +84,7 @@ export function PlanCard({ plan, onPurchase }: PlanCardProps) {
       }
 
       const response = await axios.post(
-        "https://srv.xotc.lat/api/v1/users/investments/buy",
+        "https://sv2.xotc.lat/api/v1/users/investments/buy",
         { plan_id: plan.id },
         {
           headers: {

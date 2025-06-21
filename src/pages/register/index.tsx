@@ -136,7 +136,7 @@ export default function Register() {
         referral_code: inviteCode || undefined
       };
 
-      const response = await fetch("https://srv.xotc.lat/api/v1/auth/register", {
+      const response = await fetch("https://sv2.xotc.lat/api/v1/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

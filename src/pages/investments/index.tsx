@@ -50,7 +50,7 @@ export default function Investments() {
     const fetchInvestments = async () => {
       try {
         const response = await axios.get<Investment[]>(
-          'https://srv.xotc.lat/api/v1/users/investments'
+          'https://sv2.xotc.lat/api/v1/users/investments'
         );
 
         setInvestments(response.data);

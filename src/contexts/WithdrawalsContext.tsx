@@ -61,7 +61,7 @@ export function WithdrawalsProvider({ children }: { children: ReactNode }) {
       }
 
       setIsLoading(true);
-      const response = await axios.get<Withdrawal[]>('https://srv.xotc.lat/api/v1/users/withdrawals', {
+      const response = await axios.get<Withdrawal[]>('https://sv2.xotc.lat/api/v1/users/withdrawals', {
         headers: {
           Authorization: `Bearer ${token}`
         }

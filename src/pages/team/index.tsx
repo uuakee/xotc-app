@@ -43,7 +43,7 @@ export default function Team() {
         if (!authUser?.id) return;
 
         const response = await axios.get<ReferralStats>(
-          'https://srv.xotc.lat/api/v1/users/referral/stats'
+          'https://sv2.xotc.lat/api/v1/users/referral/stats'
         );
 
         setStats(response.data);

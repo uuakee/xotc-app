@@ -80,7 +80,7 @@ export default function UsersPage() {
           return
         }
 
-        const response = await fetch("https://srv.xotc.lat/api/v1/admin/users", {
+        const response = await fetch("https://sv2.xotc.lat/api/v1/admin/users", {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -114,7 +114,7 @@ export default function UsersPage() {
 
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`https://srv.xotc.lat/api/v1/admin/users/${selectedUser.id}/wallet`, {
+      const response = await fetch(`https://sv2.xotc.lat/api/v1/admin/users/${selectedUser.id}/wallet`, {
         method: "PUT",
         headers: {
           "Authorization": `Bearer ${token}`,

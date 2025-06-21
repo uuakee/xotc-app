@@ -126,7 +126,7 @@ export default function Dashboard() {
         }
 
         const response = await axios.get<Plan[]>(
-          'https://srv.xotc.lat/api/v1/plans/list',
+          'https://sv2.xotc.lat/api/v1/plans/list',
           {
             headers: {
               Authorization: `Bearer ${token}`

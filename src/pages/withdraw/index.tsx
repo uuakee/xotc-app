@@ -82,7 +82,7 @@ export default function Withdraw() {
         return;
       }
 
-      const response = await fetch("https://srv.xotc.lat/api/v1/payments/withdrawal", {
+      const response = await fetch("https://sv2.xotc.lat/api/v1/payments/withdrawal", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

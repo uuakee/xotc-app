@@ -104,7 +104,7 @@ export default function PlansPage() {
         return
       }
 
-      const response = await fetch("https://srv.xotc.lat/api/v1/admin/plans", {
+      const response = await fetch("https://sv2.xotc.lat/api/v1/admin/plans", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -128,8 +128,8 @@ export default function PlansPage() {
     try {
       const token = localStorage.getItem("token")
       const url = selectedPlan
-        ? `https://srv.xotc.lat/api/v1/admin/plans/${selectedPlan.id}`
-        : "https://srv.xotc.lat/api/v1/admin/plans"
+        ? `https://sv2.xotc.lat/api/v1/admin/plans/${selectedPlan.id}`
+        : "https://sv2.xotc.lat/api/v1/admin/plans"
 
       const response = await fetch(url, {
         method: selectedPlan ? "PUT" : "POST",
@@ -166,7 +166,7 @@ export default function PlansPage() {
 
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`https://srv.xotc.lat/api/v1/admin/plans/${plan.id}`, {
+      const response = await fetch(`https://sv2.xotc.lat/api/v1/admin/plans/${plan.id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`
@@ -206,7 +206,7 @@ export default function PlansPage() {
   async function handleToggleActive(plan: Plan) {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`https://srv.xotc.lat/api/v1/admin/plans/${plan.id}/toggle`, {
+      const response = await fetch(`https://sv2.xotc.lat/api/v1/admin/plans/${plan.id}/toggle`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,

@@ -64,7 +64,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return;
       }
 
-      const response = await axios.get<{ user: User }>('https://srv.xotc.lat/api/v1/auth/me', {
+      const response = await axios.get<{ user: User }>('https://sv2.xotc.lat/api/v1/auth/me', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -89,7 +89,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const login = async (cpf: string, password: string) => {
     try {
-      const response = await axios.post<AuthResponse>('https://srv.xotc.lat/api/v1/auth/login', {
+      const response = await axios.post<AuthResponse>('https://sv2.xotc.lat/api/v1/auth/login', {
         cpf,
         password
       });

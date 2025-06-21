@@ -52,7 +52,7 @@ export default function Deposit() {
         return;
       }
 
-      const response = await fetch("https://srv.xotc.lat/api/v1/payments/deposit", {
+      const response = await fetch("https://sv2.xotc.lat/api/v1/payments/deposit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
