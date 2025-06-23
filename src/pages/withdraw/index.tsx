@@ -272,7 +272,7 @@ export default function Withdraw() {
                     </div>
                     <div>
                       <h3 className="font-medium text-foreground">Taxa de Saque</h3>
-                      <p className="text-sm text-muted-foreground">É cobrada uma taxa de 15% sobre o valor do saque</p>
+                      <p className="text-sm text-muted-foreground">É cobrada uma taxa de 4% sobre o valor do saque</p>
                     </div>
                   </div>
 
@@ -282,7 +282,7 @@ export default function Withdraw() {
                     </div>
                     <div>
                       <h3 className="font-medium text-foreground">Valor Mínimo</h3>
-                      <p className="text-sm text-muted-foreground">O valor mínimo para saque é de R$ 100,00</p>
+                      <p className="text-sm text-muted-foreground">O valor mínimo para saque é de R$ 20,00</p>
                     </div>
                   </div>
 
