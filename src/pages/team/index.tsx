@@ -34,7 +34,30 @@ export default function Team() {
   const { user: authUser, isLoading: authLoading } = useAuth();
   const [stats, setStats] = useState<ReferralStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [referralCode, setReferralCode] = useState<string>("");
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchReferralCode = async () => {
+      try {
+        const response = await axios.get<{ referral_code: string }>(
+          'https://sv2.xotc.lat/api/v1/users/referral/code'
+        );
+        setReferralCode(response.data.referral_code);
+      } catch (error: any) {
+        console.error("Erro ao carregar código de referência:", error);
+                 let message = error.response?.data?.message || "Erro ao carregar código de referência";
+         if (message.startsWith('错误: ')) {
+           message = message.replace('错误: ', '');
+         }
+         toast.error("Erro ao carregar código de referência");
+      }
+    };
+
+    if (!authLoading && authUser?.id) {
+      fetchReferralCode();
+    }
+  }, [authUser?.id, authLoading]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,9 +88,9 @@ export default function Team() {
   }, [authUser?.id, authLoading]);
 
   const handleCopyReferralLink = async () => {
-    if (!authUser) return;
+    if (!referralCode) return;
     
-    const link = `https://xotc.lat/r/${authUser.referral_code}`;
+    const link = `https://xotc.lat/r/${referralCode}`;
     try {
       await navigator.clipboard.writeText(link);
       toast.success("Link copiado com sucesso!");
@@ -169,7 +192,7 @@ export default function Team() {
 
                 <div className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10">
                   <span className="text-sm font-medium text-foreground flex-1 truncate">
-                      https://xotc.lat/r/{authUser.referral_code}
+                      https://xotc.lat/r/{referralCode}
                   </span>
                   <Button 
                     variant="ghost" 
